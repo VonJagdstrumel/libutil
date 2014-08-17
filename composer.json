@@ -1,0 +1,29 @@
+{
+    "name": "vonjagdstrumel/argument-handler",
+    "description": "",
+    "version": "0.1.0",
+    "homepage": "http://www.behindtheshell.fr/",
+    "licence": "MIT",
+    "authors": [
+        {
+            "name": "Steve Forget",
+            "homepage": "http://www.behindtheshell.fr/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "vonjagdstrumel/util-lib": "dev-master"
+    },
+    "require-dev": {},
+    "autoload": {
+        "psr-4": {
+            "ArgumentHandler\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ArgumentHandler\\Tests\\": "tests/"
+        }
+    }
+}
