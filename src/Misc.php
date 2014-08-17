@@ -94,7 +94,7 @@ class Util
      * @param int $value
      * @param int $minVal
      * @param int $maxVal
-     * @throws Exception
+     * @throws RuntimeException
      */
     public static function checkRange($value, $minVal, $maxVal)
     {
