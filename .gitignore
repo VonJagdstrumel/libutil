@@ -1,25 +1,3 @@
-# SVN
-.svn/
-
-# Linux
-*~
-.directory
-
-# OSX
-.DS_Store
-._*
-
-# Netbeans
-nbproject/private/
-
-# Windows
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-
-# Composer
+nbproject/
 vendor/
 composer.lock
-
-# Other
-*.bak

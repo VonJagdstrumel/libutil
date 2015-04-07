@@ -1,5 +1,5 @@
 {
-    "name": "vonjagdstrumel/util-lib",
+    "name": "vonjagdstrumel/libutil",
     "description": "",
     "version": "0.1.0",
     "homepage": "http://www.behindtheshell.fr/",
@@ -11,18 +11,24 @@
             "role": "Developer"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/VonJagdstrumel/libutil.git"
+        }
+    ],
     "require": {
         "php": ">=5.4"
     },
     "require-dev": {},
     "autoload": {
         "psr-4": {
-            "UtilLib\\": "src/"
+            "LibUtil\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "UtilLib\\Tests\\": "tests/"
+            "LibUtil\\Tests\\": "tests/"
         }
     }
 }
