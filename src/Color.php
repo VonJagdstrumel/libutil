@@ -1,6 +1,6 @@
 <?php
 
-namespace UtilLib;
+namespace LibUtil;
 
 /**
  *
@@ -13,6 +13,7 @@ class Color
     protected $redValue;
     protected $greenValue;
     protected $blueValue;
+    protected $alphaValue;
 
     /**
      *
@@ -22,6 +23,7 @@ class Color
         $this->redValue = self::MIN_VALUE;
         $this->greenValue = self::MIN_VALUE;
         $this->blueValue = self::MIN_VALUE;
+        $this->alphaValue = null;
     }
 
     /**
@@ -53,6 +55,15 @@ class Color
 
     /**
      *
+     * @return int
+     */
+    public function getAlphaValue()
+    {
+        return $this->alphaValue;
+    }
+
+    /**
+     *
      * @param string $color
      * @return int
      */
@@ -67,7 +78,7 @@ class Color
      */
     public function setRedValue($value)
     {
-        Util::checkRange($value, self::MIN_VALUE, self::MAX_VALUE);
+        Misc::checkRange($value, self::MIN_VALUE, self::MAX_VALUE);
 
         $this->redValue = $value;
     }
@@ -78,7 +89,7 @@ class Color
      */
     public function setGreenValue($value)
     {
-        Util::checkRange($value, self::MIN_VALUE, self::MAX_VALUE);
+        Misc::checkRange($value, self::MIN_VALUE, self::MAX_VALUE);
 
         $this->greenValue = $value;
     }
@@ -89,7 +100,20 @@ class Color
      */
     public function setBlueValue($value)
     {
-        Util::checkRange($value, self::MIN_VALUE, self::MAX_VALUE);
+        Misc::checkRange($value, self::MIN_VALUE, self::MAX_VALUE);
+
+        $this->blueValue = $value;
+    }
+
+    /**
+     *
+     * @param int $value
+     */
+    public function setAlphaValue($value = null)
+    {
+        if ($value !== null) {
+            Misc::checkRange($value, self::MIN_VALUE, self::MAX_VALUE);
+        }
 
         $this->blueValue = $value;
     }
@@ -101,7 +125,9 @@ class Color
      */
     public function setValueByColor($color, $value)
     {
-        Util::checkRange($value, self::MIN_VALUE, self::MAX_VALUE);
+        if ($color != 'alpha' || $value !== null) {
+            Misc::checkRange($value, self::MIN_VALUE, self::MAX_VALUE);
+        }
 
         $this->{"{$color}Value"} = $value;
     }
@@ -115,7 +141,8 @@ class Color
         return [
             'red' => $this->redValue,
             'green' => $this->greenValue,
-            'blue' => $this->blueValue
+            'blue' => $this->blueValue,
+            'alpha' => $this->alphaValue
         ];
     }
 }

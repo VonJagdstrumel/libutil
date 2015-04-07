@@ -1,6 +1,6 @@
 <?php
 
-namespace UtilLib;
+namespace LibUtil;
 
 /**
  *
@@ -20,8 +20,8 @@ class MatrixCache
     {
         // TODO: Check arguments
         $this->length = $length;
-        $this->itemVector = new SplFixedArray(pow($length, 2));
-        $this->countVector = new SplFixedArray(pow($length, 2));
+        $this->itemVector = new \SplFixedArray(pow($length, 2));
+        $this->countVector = new \SplFixedArray(pow($length, 2));
     }
 
     /**
@@ -39,11 +39,18 @@ class MatrixCache
         $this->countVector[$offset] = $count;
     }
 
+    /**
+     *
+     * @param int $x
+     * @param int $y
+     * @return mixed
+     * @throws \RuntimeException
+     */
     public function getItem($x, $y)
     {
         // TODO: Check arguments
         if (!$this->hasItem($x, $y)) {
-            throw new RuntimeException('No item defined at these coordinates.');
+            throw new \RuntimeException('No item defined at these coordinates.');
         }
 
         $item = $this->itemVector[$this->toVectorOffset($x, $y)];
@@ -67,13 +74,13 @@ class MatrixCache
      *
      * @param int $x
      * @param int $y
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
     protected function removeItem($x, $y)
     {
         // TODO: Check arguments
         if (!$this->hasItem($x, $y)) {
-            throw new RuntimeException('No item defined at these coordinates.');
+            throw new \RuntimeException('No item defined at these coordinates.');
         }
 
         $offset = $this->toVectorOffset($x, $y);
@@ -85,13 +92,13 @@ class MatrixCache
      *
      * @param int $x
      * @param int $y
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
     protected function decrementCount($x, $y)
     {
         // TODO: Check arguments
         if (!$this->hasItem($x, $y)) {
-            throw new RuntimeException('No item defined at these coordinates.');
+            throw new \RuntimeException('No item defined at these coordinates.');
         }
 
         $offset = $this->toVectorOffset($x, $y);
