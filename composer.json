@@ -11,12 +11,6 @@
             "role": "Developer"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/VonJagdstrumel/libutil.git"
-        }
-    ],
     "require": {
         "php": ">=5.4"
     },
