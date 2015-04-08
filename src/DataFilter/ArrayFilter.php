@@ -17,14 +17,14 @@ class ArrayFilter implements StrictFilter
 
     public static function isEmpty(array $array)
     {
-        return empty($var);
+        return empty($array);
     }
 
     public static function isSizeOf(array $array, $size)
     {
         AssertionHelper::exception(IntegerFilter::isTypeOf($size));
 
-        return count($var) == $size;
+        return count($array) == $size;
     }
 
     public static function isAssoc(array $array)

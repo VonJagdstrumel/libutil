@@ -23,22 +23,23 @@ class FloatFilter implements LooseFilter
 
     public static function isOver($number, $minValue)
     {
-        return self::isTypeOf($number) &&
-            self::isTypeOf($minValue) &&
-            ($number > $minValue);
+        AssertionHelper::exception(self::isTypeOf($number));
+        AssertionHelper::exception(self::isTypeOf($minValue));
+
+        return $number > $minValue;
     }
 
     public static function isUnder($number, $maxValue)
     {
-        return self::isTypeOf($number) &&
-            self::isTypeOf($maxValue) &&
-            ($number < $maxValue);
+        AssertionHelper::exception(self::isTypeOf($number));
+        AssertionHelper::exception(self::isTypeOf($maxValue));
+
+        return $number < $maxValue;
     }
 
     public static function isBetween($number, $minValue, $maxValue)
     {
-        return self::isOver($number, $minValue) &&
-            self::isUnder($number, $maxValue);
+        return self::isOver($number, $minValue) && self::isUnder($number, $maxValue);
     }
 
     public static function isNegative($number)

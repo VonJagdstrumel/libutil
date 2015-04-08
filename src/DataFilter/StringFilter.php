@@ -36,53 +36,71 @@ class StringFilter implements LooseFilter
         return strlen($string) == $size;
     }
 
-    public static function isIpv4($string, $network = false)
+    public static function isIpv4($string)
     {
-        return null;
+        AssertionHelper::exception(self::isTypeOf($string));
+
+        return (bool) filter_var($string, FILTER_VALIDATE_IP, ['flags' => FILTER_FLAG_IPV4]);
     }
 
-    public static function isIpv6($string, $network = false)
+    public static function isIpv6($string)
     {
-        return null;
+        AssertionHelper::exception(self::isTypeOf($string));
+
+        return (bool) filter_var($string, FILTER_VALIDATE_IP, ['flags' => FILTER_FLAG_IPV6]);
     }
 
     public static function isMac($string)
     {
-        return null
+        AssertionHelper::exception(self::isTypeOf($string));
+
+        return (bool) preg_match('/^([0-9a-f]{2}[-:]){5}[0-9a-f]{2}$/i', $string);
     }
 
     public static function isEmailAddress($string)
     {
-        return null;
+        AssertionHelper::exception(self::isTypeOf($string));
+
+        return (bool) filter_var($string, FILTER_VALIDATE_EMAIL);
+    }
+
+    public static function isUrl($string)
+    {
+        AssertionHelper::exception(self::isTypeOf($string));
+
+        return (bool) filter_var($string, FILTER_VALIDATE_URL);
     }
 
     public static function isDomainName($string)
     {
-        return null;
+        AssertionHelper::exception(self::isTypeOf($string));
+
+        return (bool) preg_match('/^(([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])\.)*([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])$/i');
     }
 
-    public static function isUnixPath($string)
+    public static function isOctal($string)
     {
-        return null;
+        AssertionHelper::exception(self::isTypeOf($string));
+
+        return (bool) preg_match('/^(0o)?[0-7]+$/i', $string);
     }
 
-    public static function isOctal($string, $strict = false)
+    public static function isBinary($string)
     {
-        return null;
+        AssertionHelper::exception(self::isTypeOf($string));
+
+        return (bool) preg_match('/^(0b)?[01]+$/i', $string);
     }
 
-    public static function isBinary($string, $strict = false)
+    public static function isHexadecimal($string)
     {
-        return null;
+        AssertionHelper::exception(self::isTypeOf($string));
+
+        return (bool) preg_match('/^(0x)?[0-9a-f]+$/i', $string);
     }
 
-    public static function isHexadecimal($string, $strict = false)
+    public static function isBase64($string)
     {
-        return null;
-    }
-
-    public static function isBase64($string, $strict = false)
-    {
-        return null;
+        return (bool) base64_decode($string, true);
     }
 }
