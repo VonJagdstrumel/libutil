@@ -4,7 +4,6 @@ namespace LibUtil\Helper;
 
 use LibUtil\DataFilter\IntegerFilter;
 use LibUtil\DataFilter\ResourceFilter;
-use LibUtil\DataFilter\StringFilter;
 use LibUtil\Helper\AssertionHelper;
 
 /**
@@ -30,14 +29,13 @@ class OutputHelper
 
     /**
      *
-     * @param string $message
+     * @param \Exception $exception
      * @param resource $destination
      */
-    public static function printException($message, $destination = STDERR)
+    public static function printException(\Exception $exception, $destination = STDERR)
     {
-        AssertionHelper::exception(StringFilter::isTypeOf($message));
         AssertionHelper::exception(ResourceFilter::isSubtypeOf($destination, 'stream'));
 
-        fwrite($destination, "$message\n");
+        fwrite($destination, "$exception\n");
     }
 }
