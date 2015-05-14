@@ -1,5 +1,5 @@
 {
-    "name": "vonjagdstrumel/argument-handler",
+    "name": "vonjagdstrumel/libarg",
     "description": "",
     "version": "0.1.0",
     "homepage": "http://www.behindtheshell.fr/",
@@ -11,19 +11,25 @@
             "role": "Developer"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/VonJagdstrumel/libutil.git"
+        }
+    ],
     "require": {
         "php": ">=5.4",
-        "vonjagdstrumel/util-lib": "dev-master"
+        "vonjagdstrumel/libutil": "dev-master"
     },
     "require-dev": {},
     "autoload": {
         "psr-4": {
-            "ArgumentHandler\\": "src/"
+            "LibArg\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ArgumentHandler\\Tests\\": "tests/"
+            "LibArg\\Tests\\": "tests/"
         }
     }
 }
