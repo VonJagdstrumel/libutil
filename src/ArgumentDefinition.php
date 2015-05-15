@@ -26,8 +26,9 @@ class ArgumentDefinition
      */
     public function __construct($shortIdentifier, $longIdentifier, $flag, $description)
     {
-        $validParameters = self::isIdentifier($shortIdentifier);
-        $validParameters |= self::isIdentifier($longIdentifier, true);
+        $validParameters = is_null($shortIdentifier) && self::isIdentifier($longIdentifier, true);
+        $validParameters |= is_null($longIdentifier) && self::isIdentifier($shortIdentifier);
+        $validParameters |= self::isIdentifier($shortIdentifier) && self::isIdentifier($longIdentifier, true);
         $validParameters &= self::isFlag($flag);
 
         if (!$validParameters) {
@@ -95,19 +96,19 @@ class ArgumentDefinition
      */
     public function getShortSynthax()
     {
-        $formatted = $this->shortIdentifier;
+        $synthax = $this->shortIdentifier;
 
-        if ($formatted) {
-            $formatted = '-' . $formatted;
+        if ($synthax) {
+            $synthax = '-' . $synthax;
 
             if ($this->flag == self::FLAG_MANDATORY_VALUE) {
-                $formatted .= ' VALUE';
+                $synthax .= ' VALUE';
             } elseif ($this->flag == self::FLAG_OPTIONAL_VALUE) {
-                $formatted .= ' [VALUE]';
+                $synthax .= '[=VALUE]';
             }
         }
 
-        return $formatted;
+        return $synthax;
     }
 
     /**
@@ -116,37 +117,36 @@ class ArgumentDefinition
      */
     public function getLongSynthax()
     {
-        $formatted = $this->longIdentifier;
+        $synthax = $this->longIdentifier;
 
-        if ($formatted) {
-            $formatted = '--' . $formatted;
+        if ($synthax) {
+            $synthax = '--' . $synthax;
 
             if ($this->flag == self::FLAG_MANDATORY_VALUE) {
-                $formatted .= '=VALUE';
+                $synthax .= '=VALUE';
             } elseif ($this->flag == self::FLAG_OPTIONAL_VALUE) {
-                $formatted .= '[=VALUE]';
+                $synthax .= '[=VALUE]';
             }
         }
 
-        return $formatted;
+        return $synthax;
     }
 
     /**
      *
-     * @param int $padLength
      * @return string
      */
     public function getBothSynthax()
     {
-        $res = $this->getShortSynthax();
+        $synthax = $this->getShortSynthax();
 
         if ($this->shortIdentifier && $this->longIdentifier) {
-            $res .= ', ';
+            $synthax .= ', ';
         }
 
-        $res .= $this->getLongSynthax();
+        $synthax .= $this->getLongSynthax();
 
-        return $res;
+        return $synthax;
     }
 
     /**

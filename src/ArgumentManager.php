@@ -12,15 +12,19 @@ class ArgumentManager
     protected $argDefinitionList;
     protected $usage;
     protected $description;
+    protected $acceptFile;
+    protected $acceptStdin;
 
     /**
      *
      */
-    public function __construct($usage, $description)
+    public function __construct($usage, $description, $acceptFile = false, $acceptStdin = false)
     {
         $this->argDefinitionList = new \SplDoublyLinkedList();
         $this->usage = $usage;
         $this->description = $description;
+        $this->acceptFile = $acceptFile;
+        $this->acceptStdin = $acceptStdin;
     }
 
     /**
@@ -67,43 +71,43 @@ class ArgumentManager
 
     /**
      *
-     * @return int
-     */
-    public function argumentDefinitionCount()
-    {
-        return $this->argDefinitionList->count();
-    }
-
-    /**
-     * @version NOT_USABLE
-     * @return \SplFixedArray
+     * @return array
      */
     public function getReceivedArgumentList()
     {
-        $argList = getopt('', []);
+        $shortDefList = '';
+        $longDefList = [];
 
-        return \SplFixedArray::fromArray($argList);
+        foreach ($this->getArgumentDefinitionList() as $entry) {
+            $shortDefList .= $entry->getShortIdentifier() . $entry->getFlag();
+            $longDefList[] = $entry->getLongIdentifier() . $entry->getFlag();
+        }
+
+        return getopt($shortDefList, $longDefList);
     }
 
     /**
      *
-     * @param string $argString
-     * @return boolean
+     * @param string $identifier
+     * @return mixed
      */
-    public function hasReceivedArgument($argString)
+    public function getReceivedArgument($identifier)
     {
         $argList = $this->getReceivedArgumentList();
 
-        return isset($argList[$argString]);
+        return isset($argList[$identifier]) ? $argList[$identifier] : null;
     }
 
     /**
      *
-     * @return int
+     * @param string $identifier
+     * @return boolean
      */
-    public function receivedArgumentCount()
+    public function hasReceivedArgument($identifier)
     {
-        return $this->getReceivedArgumentList()->count();
+        $argList = $this->getReceivedArgumentList();
+
+        return isset($argList[$identifier]);
     }
 
     /**
