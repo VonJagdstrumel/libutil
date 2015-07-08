@@ -46,15 +46,15 @@ class HexDataHelper
 
     /**
      *
-     * @param string $string
+     * @param string $hex
      * @return string
      */
-    public static function reverseHex($string)
+    public static function reverseHex($hex)
     {
-        $revstring = '';
-        for ($i = 0; $i < strlen($string) - 1; $i += 2) {
-            $revstring = $string[$i] . $string[$i + 1] . $revstring;
-        }
-        return $revstring;
+        $hexArray = str_split($hex, 2);
+        $lastIndex = count($hexArray) - 1;
+        $hexArray[$lastIndex] = str_pad($hexArray[$lastIndex], 2, "0", STR_PAD_LEFT);
+        $hexArray = array_reverse($hexArray);
+        return implode($hexArray);
     }
 }
