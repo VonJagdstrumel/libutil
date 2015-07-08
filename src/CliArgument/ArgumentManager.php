@@ -1,8 +1,6 @@
 <?php
 
-namespace LibArg;
-
-use LibArg\ArgumentDefinition;
+namespace LibUtil;
 
 /**
  *
@@ -12,19 +10,15 @@ class ArgumentManager
     protected $argDefinitionList;
     protected $usage;
     protected $description;
-    protected $acceptFile;
-    protected $acceptStdin;
 
     /**
      *
      */
-    public function __construct($usage, $description, $acceptFile = false, $acceptStdin = false)
+    public function __construct($usage, $description)
     {
         $this->argDefinitionList = new \SplDoublyLinkedList();
         $this->usage = $usage;
         $this->description = $description;
-        $this->acceptFile = $acceptFile;
-        $this->acceptStdin = $acceptStdin;
     }
 
     /**

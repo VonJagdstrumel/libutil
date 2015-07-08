@@ -1,6 +1,6 @@
 <?php
 
-namespace LibArg;
+namespace LibUtil;
 
 /**
  *
