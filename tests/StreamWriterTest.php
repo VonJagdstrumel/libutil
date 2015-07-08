@@ -5,9 +5,15 @@ namespace LibUtil\Tests;
 use LibUtil\DataPacker;
 use LibUtil\StructStream\StreamWriter;
 
+/**
+ *
+ */
 class StreamWriterTest extends StreamHandlerTest
 {
 
+    /**
+     *
+     */
     public function setUp()
     {
         parent::setUp();
@@ -15,6 +21,9 @@ class StreamWriterTest extends StreamHandlerTest
         $this->streamWriter = new StreamWriter($this->fileObject, $dataPacker);
     }
 
+    /**
+     *
+     */
     public function testNegativeChar()
     {
         $this->streamWriter->writeChar(self::$sampleValues[0]);
@@ -24,6 +33,9 @@ class StreamWriterTest extends StreamHandlerTest
         $this->assertTrue($this->fileObject->eof());
     }
 
+    /**
+     *
+     */
     public function testChar()
     {
         $this->streamWriter->writeChar(self::$sampleValues[1]);
@@ -33,6 +45,9 @@ class StreamWriterTest extends StreamHandlerTest
         $this->assertTrue($this->fileObject->eof());
     }
 
+    /**
+     *
+     */
     public function testUnsignedChar()
     {
         $this->streamWriter->writeUnsignedChar(self::$sampleValues[2]);
@@ -42,6 +57,9 @@ class StreamWriterTest extends StreamHandlerTest
         $this->assertTrue($this->fileObject->eof());
     }
 
+    /**
+     *
+     */
     public function testNegativeShort()
     {
         $this->streamWriter->writeShort(self::$sampleValues[3]);
@@ -51,6 +69,9 @@ class StreamWriterTest extends StreamHandlerTest
         $this->assertTrue($this->fileObject->eof());
     }
 
+    /**
+     *
+     */
     public function testShort()
     {
         $this->streamWriter->writeShort(self::$sampleValues[4]);
@@ -60,6 +81,9 @@ class StreamWriterTest extends StreamHandlerTest
         $this->assertTrue($this->fileObject->eof());
     }
 
+    /**
+     *
+     */
     public function testUnsignedShort()
     {
         $this->streamWriter->writeUnsignedShort(self::$sampleValues[5]);
@@ -69,6 +93,9 @@ class StreamWriterTest extends StreamHandlerTest
         $this->assertTrue($this->fileObject->eof());
     }
 
+    /**
+     *
+     */
     public function testNegativeLong()
     {
         $this->streamWriter->writeLong(self::$sampleValues[6]);
@@ -78,6 +105,9 @@ class StreamWriterTest extends StreamHandlerTest
         $this->assertTrue($this->fileObject->eof());
     }
 
+    /**
+     *
+     */
     public function testLong()
     {
         $this->streamWriter->writeLong(self::$sampleValues[7]);
@@ -87,6 +117,9 @@ class StreamWriterTest extends StreamHandlerTest
         $this->assertTrue($this->fileObject->eof());
     }
 
+    /**
+     *
+     */
     public function testUnsignedLong()
     {
         $this->streamWriter->writeUnsignedLong(self::$sampleValues[8]);
@@ -96,6 +129,9 @@ class StreamWriterTest extends StreamHandlerTest
         $this->assertTrue($this->fileObject->eof());
     }
 
+    /**
+     *
+     */
     public function testNegativeFloat()
     {
         $this->streamWriter->writeFloat(self::$sampleValues[9]);
@@ -105,6 +141,9 @@ class StreamWriterTest extends StreamHandlerTest
         $this->assertTrue($this->fileObject->eof());
     }
 
+    /**
+     *
+     */
     public function testFloat()
     {
         $this->streamWriter->writeFloat(self::$sampleValues[10]);
@@ -114,6 +153,9 @@ class StreamWriterTest extends StreamHandlerTest
         $this->assertTrue($this->fileObject->eof());
     }
 
+    /**
+     *
+     */
     public function testNegativeDouble()
     {
         $this->streamWriter->writeDouble(self::$sampleValues[11]);
@@ -123,6 +165,9 @@ class StreamWriterTest extends StreamHandlerTest
         $this->assertTrue($this->fileObject->eof());
     }
 
+    /**
+     *
+     */
     public function testDouble()
     {
         $this->streamWriter->writeDouble(self::$sampleValues[12]);
@@ -132,6 +177,9 @@ class StreamWriterTest extends StreamHandlerTest
         $this->assertTrue($this->fileObject->eof());
     }
 
+    /**
+     *
+     */
     public function testString()
     {
         $this->streamWriter->writeString(self::$sampleValues[13]);
@@ -141,6 +189,9 @@ class StreamWriterTest extends StreamHandlerTest
         $this->assertTrue($this->fileObject->eof());
     }
 
+    /**
+     *
+     */
     public function testUnicodeString()
     {
         $this->streamWriter->writeUnicodeString(self::$sampleValues[14]);
@@ -150,6 +201,9 @@ class StreamWriterTest extends StreamHandlerTest
         $this->assertTrue($this->fileObject->eof());
     }
 
+    /**
+     *
+     */
     public function testNullString()
     {
         $this->streamWriter->writeNullString(self::$sampleValues[15]);
@@ -159,6 +213,9 @@ class StreamWriterTest extends StreamHandlerTest
         $this->assertTrue($this->fileObject->eof());
     }
 
+    /**
+     *
+     */
     public function testUnicodeNullString()
     {
         $this->streamWriter->writeUnicodeNullString(self::$sampleValues[16]);
@@ -168,6 +225,9 @@ class StreamWriterTest extends StreamHandlerTest
         $this->assertTrue($this->fileObject->eof());
     }
 
+    /**
+     *
+     */
     public function testStringBlock()
     {
         $this->streamWriter->writeStringBlock(self::$sampleValues[17], 42);
@@ -177,6 +237,9 @@ class StreamWriterTest extends StreamHandlerTest
         $this->assertTrue($this->fileObject->eof());
     }
 
+    /**
+     *
+     */
     public function testUnicodeStringBlock()
     {
         $this->streamWriter->writeUnicodeStringBlock(self::$sampleValues[18], 42);
@@ -186,6 +249,9 @@ class StreamWriterTest extends StreamHandlerTest
         $this->assertTrue($this->fileObject->eof());
     }
 
+    /**
+     *
+     */
     public function testFull()
     {
         $this->streamWriter->writeChar(self::$sampleValues[0]);

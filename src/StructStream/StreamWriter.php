@@ -12,7 +12,7 @@ class StreamWriter extends StreamHandler
 
     /**
      *
-     * @return int
+     * @param int $value
      */
     public function writeChar($value)
     {
@@ -22,7 +22,7 @@ class StreamWriter extends StreamHandler
 
     /**
      *
-     * @return int
+     * @param int $value
      */
     public function writeUnsignedChar($value)
     {
@@ -32,7 +32,7 @@ class StreamWriter extends StreamHandler
 
     /**
      *
-     * @return int
+     * @param int $value
      */
     public function writeShort($value)
     {
@@ -42,7 +42,7 @@ class StreamWriter extends StreamHandler
 
     /**
      *
-     * @return int
+     * @param int $value
      */
     public function writeUnsignedShort($value)
     {
@@ -52,7 +52,7 @@ class StreamWriter extends StreamHandler
 
     /**
      *
-     * @return int
+     * @param int $value
      */
     public function writeLong($value)
     {
@@ -62,7 +62,7 @@ class StreamWriter extends StreamHandler
 
     /**
      *
-     * @return int
+     * @param int $value
      */
     public function writeUnsignedLong($value)
     {
@@ -72,7 +72,7 @@ class StreamWriter extends StreamHandler
 
     /**
      *
-     * @return float
+     * @param float $value
      */
     public function writeFloat($value)
     {
@@ -82,7 +82,7 @@ class StreamWriter extends StreamHandler
 
     /**
      *
-     * @return float
+     * @param float $value
      */
     public function writeDouble($value)
     {
@@ -143,8 +143,8 @@ class StreamWriter extends StreamHandler
     /**
      *
      * @param string $string
-     * @param type $length
-     * @param type $padding
+     * @param int $length
+     * @param string $padding
      */
     public function writeUnicodeStringBlock($string, $length, $padding = "\x00")
     {

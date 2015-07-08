@@ -2,6 +2,9 @@
 
 namespace LibUtil\Tests;
 
+/**
+ *
+ */
 abstract class StreamHandlerTest extends \PHPUnit_Framework_TestCase
 {
     protected static $sampleValues;
@@ -10,6 +13,9 @@ abstract class StreamHandlerTest extends \PHPUnit_Framework_TestCase
     protected $fileObject;
     protected $streamReader;
 
+    /**
+     *
+     */
     public static function setUpBeforeClass()
     {
         self::$sampleValues = [
@@ -60,11 +66,17 @@ abstract class StreamHandlerTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     *
+     */
     public function setUp()
     {
         $this->fileObject = new \SplTempFileObject();
     }
 
+    /**
+     * 
+     */
     public function tearDown()
     {
         $this->fileObject = null;
