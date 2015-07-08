@@ -16,9 +16,11 @@ class ListHelper
     public static function arrayToList(array $array)
     {
         $queue = new \SplDoublyLinkedList();
+
         foreach ($array as $item) {
             $queue->push($item);
         }
+
         return $queue;
     }
 
@@ -30,9 +32,11 @@ class ListHelper
     public static function listToArray(\SplDoublyLinkedList $list)
     {
         $array = [];
+
         foreach ($list as $item) {
             $array[] = $item;
         }
+
         return $array;
     }
 }
