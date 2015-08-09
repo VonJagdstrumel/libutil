@@ -1,29 +1,27 @@
 <?php
 
-namespace LibUtil;
+namespace LibUtil\Color;
 
 /**
  *
  */
-class Color
+class PlainColor
 {
     const MIN_VALUE = 0;
     const MAX_VALUE = 255;
 
-    protected $redValue;
-    protected $greenValue;
-    protected $blueValue;
-    protected $alphaValue;
+    private $redValue;
+    private $greenValue;
+    private $blueValue;
 
     /**
      *
      */
-    public function __construct()
+    function __construct($red = self::MIN_VALUE, $green = self::MIN_VALUE, $blue = self::MIN_VALUE)
     {
-        $this->redValue = self::MIN_VALUE;
-        $this->greenValue = self::MIN_VALUE;
-        $this->blueValue = self::MIN_VALUE;
-        $this->alphaValue = null;
+        $this->redValue = $red;
+        $this->greenValue = $green;
+        $this->blueValue = $blue;
     }
 
     /**
@@ -55,21 +53,12 @@ class Color
 
     /**
      *
+     * @param string $name
      * @return int
      */
-    public function getAlphaValue()
+    public function getValueByName($name)
     {
-        return $this->alphaValue;
-    }
-
-    /**
-     *
-     * @param string $color
-     * @return int
-     */
-    public function getValueByColor($color)
-    {
-        return $this->{"{$color}Value"};
+        return $this->{"{$name}Value"};
     }
 
     /**
@@ -107,29 +96,12 @@ class Color
 
     /**
      *
+     * @param string $name
      * @param int $value
      */
-    public function setAlphaValue($value = null)
+    public function setValueByName($name, $value)
     {
-        if ($value !== null) {
-            Misc::checkRange($value, self::MIN_VALUE, self::MAX_VALUE);
-        }
-
-        $this->blueValue = $value;
-    }
-
-    /**
-     *
-     * @param string $color
-     * @param int $value
-     */
-    public function setValueByColor($color, $value)
-    {
-        if ($color != 'alpha' || $value !== null) {
-            Misc::checkRange($value, self::MIN_VALUE, self::MAX_VALUE);
-        }
-
-        $this->{"{$color}Value"} = $value;
+        $this->{"{$name}Value"} = $value;
     }
 
     /**
@@ -141,8 +113,7 @@ class Color
         return [
             'red' => $this->redValue,
             'green' => $this->greenValue,
-            'blue' => $this->blueValue,
-            'alpha' => $this->alphaValue
+            'blue' => $this->blueValue
         ];
     }
 }
