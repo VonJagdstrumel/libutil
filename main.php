@@ -2,35 +2,24 @@
 
 require_once 'vendor/autoload.php';
 
-use LibArg\ArgumentManager;
-use LibArg\ArgumentDefinition;
+use LibUtil\CliArgument\ArgumentManager;
+use LibUtil\CliArgument\OptionDefinition;
 
-$one = new ArgumentDefinition('a', 'append', ArgumentDefinition::FLAG_NO_VALUE, 'Force append some shit in there');
-$two = new ArgumentDefinition('r', 'recursive', ArgumentDefinition::FLAG_MANDATORY_VALUE, 'Do that shit recursively');
-$three = new ArgumentDefinition('c', 'color', ArgumentDefinition::FLAG_OPTIONAL_VALUE, 'Color all the shit');
-$four = new ArgumentDefinition('s', null, ArgumentDefinition::FLAG_NO_VALUE, 'Split the shit');
-$five = new ArgumentDefinition(null, 'quiet', ArgumentDefinition::FLAG_NO_VALUE, 'Don\'t print any shit');
+$one = new OptionDefinition('a', 'append', OptionDefinition::FLAG_NO_VALUE, 'Force append some shit in there');
+$two = new OptionDefinition('r', 'recursive', OptionDefinition::FLAG_MANDATORY_VALUE, 'Do that shit recursively');
+$three = new OptionDefinition('c', 'color', OptionDefinition::FLAG_OPTIONAL_VALUE, 'Color all the shit');
+$four = new OptionDefinition('s', null, OptionDefinition::FLAG_NO_VALUE, 'Split the shit');
+$five = new OptionDefinition(null, 'quiet', OptionDefinition::FLAG_NO_VALUE, 'Don\'t print any shit');
+$five = new OptionDefinition(null, 't', OptionDefinition::FLAG_OPTIONAL_VALUE, 'Don\'t print any shit');
 
 $manager = new ArgumentManager('[OPTIONS]', 'Hahaha! Something to test?');
-$manager->addArgumentDefinition($one);
-$manager->addArgumentDefinition($two);
-$manager->addArgumentDefinition($three);
-$manager->addArgumentDefinition($four);
-$manager->addArgumentDefinition($five);
+$manager->addOptionDefinition($one);
+$manager->addOptionDefinition($two);
+$manager->addOptionDefinition($three);
+$manager->addOptionDefinition($four);
+$manager->addOptionDefinition($five);
 
 print $manager->generateHelp();
 
-var_dump($manager->getReceivedArgumentList());
-
-//$u = new ArgumentDefinition('.', '.', '', '');
-//$u = new ArgumentDefinition('.', null, '', '');
-//$u = new ArgumentDefinition(null, '.', '', '');
-//$u = new ArgumentDefinition(null, null, '', '');
-
-//$u = new ArgumentDefinition('.', 'a', '', '');
-//$u = new ArgumentDefinition(null, 'a', '', '');
-
-//$u = new ArgumentDefinition('a', '.', '', '');
-//$u = new ArgumentDefinition('a', null, '', '');
-
-//$u = new ArgumentDefinition('a', 'a', '', '');
+var_dump($manager->getReceivedOptionList());
+var_dump($manager->getArgumentList());

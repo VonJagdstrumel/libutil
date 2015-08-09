@@ -1,20 +1,20 @@
 <?php
 
-namespace LibUtil;
+namespace LibUtil\CommandLine;
 
 /**
  *
  */
-class ArgumentDefinition
+class OptionDefinition
 {
     const FLAG_NO_VALUE = '';
     const FLAG_MANDATORY_VALUE = ':';
     const FLAG_OPTIONAL_VALUE = '::';
 
-    protected $shortIdentifier;
-    protected $longIdentifier;
-    protected $flag;
-    protected $description;
+    private $shortIdentifier;
+    private $longIdentifier;
+    private $flag;
+    private $description;
 
     /**
      *
@@ -24,15 +24,15 @@ class ArgumentDefinition
      * @param string $description
      * @throws \InvalidArgumentException
      */
-    public function __construct($shortIdentifier, $longIdentifier, $flag, $description)
+    public function __construct($shortIdentifier, $longIdentifier, $flag = self::FLAG_NO_VALUE, $description = '')
     {
-        $validParameters = is_null($shortIdentifier) && self::isIdentifier($longIdentifier, true);
-        $validParameters |= is_null($longIdentifier) && self::isIdentifier($shortIdentifier);
-        $validParameters |= self::isIdentifier($shortIdentifier) && self::isIdentifier($longIdentifier, true);
-        $validParameters &= self::isFlag($flag);
+        $validSetup = is_null($shortIdentifier) && self::isIdentifier($longIdentifier, true);
+        $validSetup |= is_null($longIdentifier) && self::isIdentifier($shortIdentifier);
+        $validSetup |= self::isIdentifier($shortIdentifier) && self::isIdentifier($longIdentifier, true);
+        $validSetup &= self::isFlag($flag);
 
-        if (!$validParameters) {
-            throw new \InvalidArgumentException('Invalid identifier definition');
+        if (!$validSetup) {
+            throw new \InvalidArgumentException('Invalid option definition');
         }
 
         $this->shortIdentifier = $shortIdentifier;
@@ -43,15 +43,13 @@ class ArgumentDefinition
 
     /**
      *
-     * @param ArgumentDefinition $argDef
-     * @return int
+     * @param OptionDefinition $optDef
+     * @return boolean
      */
-    public function compareTo(ArgumentDefinition $argDef)
+    public function conflictWith(OptionDefinition $optDef)
     {
-        $isSame = $argDef->getLongIdentifier() == $this->longIdentifier;
-        $isSame |= $argDef->getShortIdentifier() == $this->shortIdentifier;
-
-        return (int) !$isSame;
+        return ($optDef->getLongIdentifier() == $this->longIdentifier) ||
+            ($optDef->getShortIdentifier() == $this->shortIdentifier);
     }
 
     /**
@@ -155,11 +153,11 @@ class ArgumentDefinition
      * @param boolean $isLong
      * @return boolean
      */
-    protected static function isIdentifier($string, $isLong = false)
+    private static function isIdentifier($string, $isLong = false)
     {
         $regex = !$isLong ? '/^[A-z0-9]$/' : '/^[A-z0-9]+$/';
 
-        return (boolean) preg_match($regex, $string);
+        return is_string($string) && preg_match($regex, $string);
     }
 
     /**
@@ -167,8 +165,8 @@ class ArgumentDefinition
      * @param string $string
      * @return boolean
      */
-    protected static function isFlag($string)
+    private static function isFlag($string)
     {
-        return (boolean) preg_match('/^:{0,2}$/', $string);
+        return is_string($string) && preg_match('/^:{0,2}$/', $string);
     }
 }
